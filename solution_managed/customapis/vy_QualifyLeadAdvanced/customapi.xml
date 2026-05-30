@@ -1,0 +1,19 @@
+<customapi uniquename="vy_QualifyLeadAdvanced">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>1</bindingtype>
+  <boundentitylogicalname>vy_lead</boundentitylogicalname>
+  <description default="Atomically qualifies a lead: creates Account, Contact, Opportunity and closes the lead.">
+    <label description="Atomically qualifies a lead: creates Account, Contact, Opportunity and closes the lead." languagecode="1033" />
+  </description>
+  <displayname default="Qualify Lead Advanced">
+    <label description="Qualify Lead Advanced" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>QualifyLeadAdvanced</name>
+  <plugintypeid>
+    <plugintypeexportkey>d64e5d73-c6e0-40e4-9fc2-2886137c6f32</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Sales Stage Progress</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 12px; background: transparent; }
+        .stages { display: flex; gap: 4px; height: 40px; align-items: stretch; }
+        .step { flex: 1; background: #e5e7eb; color: #6b7280; display: flex; align-items: center; justify-content: center; font-size: 12px; position: relative; clip-path: polygon(0% 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 0% 100%, 16px 50%); padding: 0 18px; transition: background 200ms ease; }
+        .step:first-child { clip-path: polygon(0% 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 0% 100%); padding-left: 12px; }
+        .step:last-child { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 16px 50%); padding-right: 12px; }
+        .step.active { background: #0078d4; color: #fff; font-weight: 600; }
+        .step.done { background: #16a34a; color: #fff; }
+        .err { color: #b91c1c; font-size: 12px; padding: 8px 0; }
+    </style>
+</head>
+<body>
+    <div id="stages" class="stages"></div>
+    <div id="err" class="err"></div>
+    <script>
+        var stageDefs = [
+            { value: 127550000, label: "Prospecting" },
+            { value: 127550001, label: "Qualified" },
+            { value: 127550002, label: "Proposal" },
+            { value: 127550003, label: "Negotiation" },
+            { value: 127550004, label: "Closing" }
+        ];
+
+        function render(currentValue) {
+            var host = document.getElementById("stages");
+            host.innerHTML = "";
+            var currentIdx = -1;
+            for (var i = 0; i < stageDefs.length; i++) {
+                if (stageDefs[i].value === currentValue) { currentIdx = i; break; }
+            }
+            stageDefs.forEach(function (s, idx) {
+                var el = document.createElement("div");
+                el.className = "step" + (idx < currentIdx ? " done" : idx === currentIdx ? " active" : "");
+                el.textContent = s.label;
+                host.appendChild(el);
+            });
+        }
+
+        function load() {
+            try {
+                var xrm = window.parent && window.parent.Xrm;
+                if (!xrm || !xrm.Page || !xrm.Page.data || !xrm.Page.data.entity) {
+                    document.getElementById("err").textContent = "Open this from an opportunity record.";
+                    render(null);
+                    return;
+                }
+                var stageAttr = xrm.Page.getAttribute && xrm.Page.getAttribute("vy_salesstagecode");
+                var current = stageAttr ? stageAttr.getValue() : null;
+                render(current);
+                if (stageAttr && stageAttr.addOnChange) {
+                    stageAttr.addOnChange(function () { render(stageAttr.getValue()); });
+                }
+            } catch (e) {
+                document.getElementById("err").textContent = "Stage progress unavailable: " + (e && e.message);
+                render(null);
+            }
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", load);
+        } else {
+            load();
+        }
+    </script>
+</body>
+</html>

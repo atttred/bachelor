@@ -1,0 +1,18 @@
+<customapi uniquename="vy_RecalculateForecast">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Computes weighted sales forecast across open opportunities.">
+    <label description="Computes weighted sales forecast across open opportunities." languagecode="1033" />
+  </description>
+  <displayname default="Recalculate Forecast">
+    <label description="Recalculate Forecast" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>RecalculateForecast</name>
+  <plugintypeid>
+    <plugintypeexportkey>1c369f4a-973a-4745-a6aa-007537aad9e0</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

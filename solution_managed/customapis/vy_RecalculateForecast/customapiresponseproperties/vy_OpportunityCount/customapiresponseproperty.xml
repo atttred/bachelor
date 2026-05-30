@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="vy_OpportunityCount">
+  <description default="Opportunity Count">
+    <label description="Opportunity Count" languagecode="1033" />
+  </description>
+  <displayname default="Opportunity Count">
+    <label description="Opportunity Count" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>OpportunityCount</name>
+  <type>7</type>
+</customapiresponseproperty>

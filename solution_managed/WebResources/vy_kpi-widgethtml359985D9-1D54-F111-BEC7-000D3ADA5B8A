@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>KPI Widget</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 16px; background: #fff; color: #1f2937; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .card { padding: 16px; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb; }
+        .card .label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+        .card .value { font-size: 28px; font-weight: 700; color: #0078d4; margin-top: 6px; }
+        .card.green .value { color: #16a34a; }
+        .card.amber .value { color: #d97706; }
+        .err { color: #b91c1c; font-size: 12px; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="card"><div class="label">Open Opportunities</div><div class="value" id="open">-</div></div>
+        <div class="card green"><div class="label">Pipeline Value</div><div class="value" id="pipeline">-</div></div>
+        <div class="card amber"><div class="label">Avg. Probability</div><div class="value" id="avg">-</div></div>
+    </div>
+    <div id="err" class="err"></div>
+    <script>
+        function fmt(n) {
+            if (n === null || n === undefined || isNaN(n)) return "-";
+            if (n > 999) return Math.round(n / 100) / 10 + "k";
+            return Math.round(n).toString();
+        }
+        function load() {
+            try {
+                var xrm = window.parent && window.parent.Xrm;
+                if (!xrm || !xrm.WebApi) {
+                    document.getElementById("err").textContent = "Open from inside the app.";
+                    return;
+                }
+                var query = "?$select=vy_estimatedvalue,vy_probability&$filter=statecode eq 0";
+                xrm.WebApi.retrieveMultipleRecords("vy_opportunity", query).then(function (result) {
+                    var count = result.entities.length;
+                    var totalValue = 0;
+                    var totalProb = 0;
+                    var probSamples = 0;
+                    result.entities.forEach(function (e) {
+                        var v = e.vy_estimatedvalue;
+                        var p = e.vy_probability;
+                        if (typeof v === "number") totalValue += v;
+                        if (typeof p === "number") { totalProb += p; probSamples++; }
+                    });
+                    document.getElementById("open").textContent = count;
+                    document.getElementById("pipeline").textContent = "$" + fmt(totalValue);
+                    document.getElementById("avg").textContent = probSamples > 0
+                        ? Math.round(totalProb / probSamples) + "%"
+                        : "-";
+                }, function (err) {
+                    document.getElementById("err").textContent = (err && err.message) || "Failed to load KPI data.";
+                });
+            } catch (e) {
+                document.getElementById("err").textContent = e.message || "Failed.";
+            }
+        }
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", load);
+        } else {
+            load();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Vy.Crm.Shared", "Vy.Crm.Shared\Vy.Crm.Shared.shproj", "{A4F0A2C1-3B21-4E9A-9D11-7E2C4A4B1234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vy.Crm.Plugins", "Vy.Crm.Plugins\Vy.Crm.Plugins.csproj", "{8E5A1A3D-7C12-4B8E-9F4B-71C2A5B0D801}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vy.Crm.WebResources", "Vy.Crm.WebResources\Vy.Crm.WebResources.csproj", "{D7E0E5C5-8B23-4B7C-9F2A-AC1B41C5E300}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Vy.Crm.Shared\Vy.Crm.Shared.projitems*{a4f0a2c1-3b21-4e9a-9d11-7e2c4a4b1234}*SharedItemsImports = 13
+		Vy.Crm.Shared\Vy.Crm.Shared.projitems*{8e5a1a3d-7c12-4b8e-9f4b-71c2a5b0d801}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E5A1A3D-7C12-4B8E-9F4B-71C2A5B0D801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5A1A3D-7C12-4B8E-9F4B-71C2A5B0D801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5A1A3D-7C12-4B8E-9F4B-71C2A5B0D801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5A1A3D-7C12-4B8E-9F4B-71C2A5B0D801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E0E5C5-8B23-4B7C-9F2A-AC1B41C5E300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E0E5C5-8B23-4B7C-9F2A-AC1B41C5E300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E0E5C5-8B23-4B7C-9F2A-AC1B41C5E300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E0E5C5-8B23-4B7C-9F2A-AC1B41C5E300}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

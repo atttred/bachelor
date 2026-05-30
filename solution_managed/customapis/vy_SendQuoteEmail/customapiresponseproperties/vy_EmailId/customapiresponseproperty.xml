@@ -1,0 +1,12 @@
+<customapiresponseproperty uniquename="vy_EmailId">
+  <description default="Email Id">
+    <label description="Email Id" languagecode="1033" />
+  </description>
+  <displayname default="Email Id">
+    <label description="Email Id" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <logicalentityname>email</logicalentityname>
+  <name>EmailId</name>
+  <type>5</type>
+</customapiresponseproperty>

@@ -1,0 +1,38 @@
+if (typeof Vy === "undefined") Vy = {};
+if (typeof Vy.Crm === "undefined") Vy.Crm = {};
+
+Vy.Crm.Contact = new function () {
+    var self = this;
+
+    this.Constants = {
+        Attributes: {
+            FullName:         "vy_fullname",
+            Email:            "vy_emailaddress1",
+            JobTitle:         "vy_jobtitle",
+            MobilePhone:      "vy_mobilephone",
+            ParentCustomerId: "vy_parentcustomerid"
+        }
+    };
+
+    this.onLoad = function (executionContext) {
+        var fc = executionContext.getFormContext();
+        var emailAttr = fc.getAttribute(self.Constants.Attributes.Email);
+        if (emailAttr) emailAttr.addOnChange(self.validateEmail);
+    };
+
+    this.validateEmail = function (executionContext) {
+        var fc = executionContext.getFormContext();
+        var attr = fc.getAttribute(self.Constants.Attributes.Email);
+        var v = attr.getValue();
+        var ctrl = fc.getControl(self.Constants.Attributes.Email);
+        if (!ctrl) return;
+        if (!v) { ctrl.clearNotification("vy_email"); return; }
+
+        var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        if (ok) {
+            ctrl.clearNotification("vy_email");
+        } else {
+            ctrl.setNotification("Invalid email format.", "vy_email");
+        }
+    };
+};

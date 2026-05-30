@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="vy_AccountId">
+  <description default="Account Id">
+    <label description="Account Id" languagecode="1033" />
+  </description>
+  <displayname default="Account Id">
+    <label description="Account Id" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>AccountId</name>
+  <type>12</type>
+</customapiresponseproperty>

@@ -1,0 +1,13 @@
+<customapirequestparameter uniquename="vy_OwnerId">
+  <description default="Optional. Filters opportunities by this owner; if blank, all open opportunities count.">
+    <label description="Optional. Filters opportunities by this owner; if blank, all open opportunities count." languagecode="1033" />
+  </description>
+  <displayname default="Owner">
+    <label description="Owner" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>1</isoptional>
+  <logicalentityname>systemuser</logicalentityname>
+  <name>OwnerId</name>
+  <type>5</type>
+</customapirequestparameter>

@@ -1,0 +1,29 @@
+<appaction uniquename="vy__QualifyAdvanced!e31576d8cb984789927143e45633e122!vy_lead!0">
+  <buttonlabeltext default="Qualify (Advanced)">
+    <label description="Qualify (Advanced)" languagecode="1033" />
+  </buttonlabeltext>
+  <context>1</context>
+  <contextentity>
+    <logicalname>vy_lead</logicalname>
+  </contextentity>
+  <contextvalue>vy_lead</contextvalue>
+  <fonticon>$clientsvg:ActivateOrders</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>QualifyAdvanced!e31576d8cb984789927143e45633e122</name>
+  <onclickeventjavascriptfunctionname>Vy.Crm.Lead.qualifyAdvanced</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>7ca6ba83-1d54-f111-bec7-000d3ada5b8a</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100015.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>0</visibilitytype>
+</appaction>

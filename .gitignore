@@ -1,0 +1,20 @@
+# build
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# packed solution zips (keep one in out/ if you want; ignore the rest)
+out/*.zip
+
+# nuget
+packages/
+
+# tooling
+*.tmp
+*.cache
+
+# OS
+Thumbs.db
+.DS_Store

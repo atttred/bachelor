@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="vy_ContactId">
+  <description default="Contact Id">
+    <label description="Contact Id" languagecode="1033" />
+  </description>
+  <displayname default="Contact Id">
+    <label description="Contact Id" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>ContactId</name>
+  <type>12</type>
+</customapiresponseproperty>

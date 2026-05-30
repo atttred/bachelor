@@ -1,0 +1,19 @@
+<customapi uniquename="vy_SendQuoteEmail">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>1</bindingtype>
+  <boundentitylogicalname>vy_opportunity</boundentitylogicalname>
+  <description default="Creates an email record from a template, tied to the opportunity.">
+    <label description="Creates an email record from a template, tied to the opportunity." languagecode="1033" />
+  </description>
+  <displayname default="Send Quote Email">
+    <label description="Send Quote Email" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>SendQuoteEmail</name>
+  <plugintypeid>
+    <plugintypeexportkey>33748a05-e907-4a92-b097-bf366903bb3f</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="vy_OpportunityId">
+  <description default="Opportunity Id">
+    <label description="Opportunity Id" languagecode="1033" />
+  </description>
+  <displayname default="Opportunity Id">
+    <label description="Opportunity Id" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>OpportunityId</name>
+  <type>12</type>
+</customapiresponseproperty>

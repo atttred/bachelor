@@ -1,0 +1,10 @@
+<environmentvariabledefinition schemaname="vy_plugins_min_opportunity_value">
+  <displayname default="Minimum Opportunity Value">
+    <label description="Minimum Opportunity Value" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.1.0.8</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>

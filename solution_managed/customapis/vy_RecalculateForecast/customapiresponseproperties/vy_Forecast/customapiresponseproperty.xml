@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="vy_Forecast">
+  <description default="Forecast">
+    <label description="Forecast" languagecode="1033" />
+  </description>
+  <displayname default="Forecast">
+    <label description="Forecast" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>Forecast</name>
+  <type>8</type>
+</customapiresponseproperty>

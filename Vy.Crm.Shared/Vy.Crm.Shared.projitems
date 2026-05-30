@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a4f0a2c1-3b21-4e9a-9d11-7e2c4a4b1234</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Vy.Crm.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\QualifyLeadAdvancedResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\BusinessUnit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\EnvironmentVariableDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\EnvironmentVariableValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\SystemUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\Team.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\TransactionCurrency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\VY_Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\VY_Activity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\VY_Contact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\VY_Lead.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Entities\VY_Opportunity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EntityOptionSetEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Messages\VY_QualifyLeadAdvanced.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Messages\VY_RecalculateForecast.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\Messages\VY_SendQuoteEmail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\OptionSets\ComponentState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\OptionSets\VY_ActivityType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\VyCrmContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\EnvironmentVariableService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\OptionSetService.cs" />
+  </ItemGroup>
+</Project>

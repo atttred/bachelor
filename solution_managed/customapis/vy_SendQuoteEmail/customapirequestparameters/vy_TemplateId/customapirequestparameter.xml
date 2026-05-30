@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="vy_TemplateId">
+  <description default="Identifier of the email template (Guid or template name as string).">
+    <label description="Identifier of the email template (Guid or template name as string)." languagecode="1033" />
+  </description>
+  <displayname default="Template Id">
+    <label description="Template Id" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>TemplateId</name>
+  <type>10</type>
+</customapirequestparameter>

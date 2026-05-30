@@ -1,0 +1,197 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_teams": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_teams"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "187f1cac-9d3b-4b48-bc01-42ba1fad35fd"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "vy_opportunity",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "vy_name, vy_customerid, vy_estimatedvalue, vy_salesstagecode, ownerid"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "conditions": [
+            {
+              "expression": "@not(equals(triggerOutputs()?['body/vy_salesstagecode@OData.Community.Display.V1.FormattedValue'], triggerOutputs()?['body/_vy_salesstagecode_old@OData.Community.Display.V1.FormattedValue']))"
+            }
+          ]
+        }
+      },
+      "actions": {
+        "Scope": {
+          "actions": {
+            "Compose": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "702b3c8d-f405-4f44-9766-69e8410cd753"
+              },
+              "type": "Compose",
+              "inputs": {
+                "name": "@{triggerOutputs()?['body/vy_name']}",
+                "stageNew": "@{triggerOutputs()?['body/vy_salesstagecode@OData.Community.Display.V1.FormattedValue']}",
+                "amount": "@{triggerOutputs()?['body/vy_estimatedvalue']}",
+                "ownerId": "@{triggerOutputs()?['body/_ownerid_value']}",
+                "ownerName": "@{triggerOutputs()?['body/_ownerid_value@OData.Community.Display.V1.FormattedValue']}",
+                "opportunityId": "@{triggerOutputs()?['body/vy_opportunityid']}"
+              }
+            },
+            "Add_a_new_row": {
+              "runAfter": {
+                "Compose": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "75313556-0854-4390-a60a-b87ccbafae6f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "vy_activities",
+                  "item/vy_subject": "Stage change to @{outputs('Compose')['stageNew']}",
+                  "item/vy_activitytypecode": 127550000,
+                  "item/vy_regardingobjectid_vy_opportunity@odata.bind": "vy_opportunitities(@{outputs('Compose')['opportunityId']})",
+                  "item/vy_scheduledstart": "@addDays(utcNow(), 1)",
+                  "item/ownerid@odata.bind": "systemusers(@{outputs('Compose')['ownerId']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Get_a_row_by_ID": {
+              "runAfter": {
+                "Add_a_new_row": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "502c2bfb-e2e0-4f6e-98ab-90132a993d7f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "systemusers",
+                  "recordId": "@outputs('Compose')['ownerId']",
+                  "$select": "internalemailaddress, fullname"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Post_card_in_a_chat_or_channel": {
+              "runAfter": {
+                "Get_a_row_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7ea6e65d-7a81-487e-9bb2-882f7422514a"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_teams",
+                  "operationId": "PostCardToConversation",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+                },
+                "parameters": {
+                  "poster": "Flow bot",
+                  "location": "Chat with Flow bot",
+                  "body/recipient": "vitalii.yanitskyi@lnu.edu.ua;",
+                  "body/messageBody": "{\n  \"type\": \"AdaptiveCard\",\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"version\": \"1.4\",\n  \"body\": [\n    { \"type\": \"TextBlock\", \"size\": \"Medium\", \"weight\": \"Bolder\", \"text\": \"Opportunity stage updated\" },\n    { \"type\": \"FactSet\", \"facts\": [\n        { \"title\": \"Opportunity\", \"value\": \"@{outputs('Compose')['name']}\" },\n        { \"title\": \"New stage\",   \"value\": \"@{outputs('Compose')['stageNew']}\" },\n        { \"title\": \"Estimated\",   \"value\": \"@{outputs('Compose')['amount']}\" },\n        { \"title\": \"Owner\",       \"value\": \"@{outputs('Compose')['ownerName']}\" }\n      ]\n    },\n    { \"type\": \"ActionSet\", \"actions\": [\n        { \"type\": \"Action.OpenUrl\", \"title\": \"Open record\",\n          \"url\": \"https://<your-env>.crm.dynamics.com/main.aspx?etn=vy_opportunity&id=@{outputs('Compose')['opportunityId']}&pagetype=entityrecord\" }\n      ]\n    }\n  ]\n}"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Send_an_email_(V2)": {
+              "runAfter": {
+                "Post_card_in_a_chat_or_channel": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "4b3971b1-beac-4c33-bdda-167e313b754a"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "vitalii.yanitskyi@lnu.edu.ua",
+                  "emailMessage/Subject": "[CRM] Stage change on @{outputs('Compose')['name']}",
+                  "emailMessage/Body": "<p>Hello @{outputs('Get_a_row_by_ID')?['fullname']},</p>\n<p>The opportunity <strong>@{outputs('Compose')['name']}</strong> moved to\n<strong>@{outputs('Compose')['stageNew']}</strong>.</p>\n<p>Estimated value: @{outputs('Compose')['amount']}.</p>\n<p>A follow-up task was created for you in CRM.</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "cf39e323-8322-4e88-afaf-b53121b21422"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

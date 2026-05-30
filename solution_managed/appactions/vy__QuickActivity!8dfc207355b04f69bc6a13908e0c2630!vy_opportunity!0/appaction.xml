@@ -1,0 +1,29 @@
+<appaction uniquename="vy__QuickActivity!8dfc207355b04f69bc6a13908e0c2630!vy_opportunity!0">
+  <buttonlabeltext default="Quick Activity">
+    <label description="Quick Activity" languagecode="1033" />
+  </buttonlabeltext>
+  <context>1</context>
+  <contextentity>
+    <logicalname>vy_opportunity</logicalname>
+  </contextentity>
+  <contextvalue>vy_opportunity</contextvalue>
+  <fonticon>EditEvent</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>QuickActivity!8dfc207355b04f69bc6a13908e0c2630</name>
+  <onclickeventjavascriptfunctionname>Vy.Crm.QuickActivity.open</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>7ea6ba83-1d54-f111-bec7-000d3ada5b8a</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100015.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>0</visibilitytype>
+</appaction>
