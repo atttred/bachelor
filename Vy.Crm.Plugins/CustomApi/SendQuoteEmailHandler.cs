@@ -37,7 +37,7 @@ namespace Vy.Crm.Plugins
 
                 if (oppRef == null)
                 {
-                    throw new InvalidPluginExecutionException("Opportunity reference missing.");
+                    throw new InvalidPluginExecutionException("Відсутнє посилання на угоду.");
                 }
 
                 string templateId = context.InputParameters.Contains("TemplateId")
@@ -46,7 +46,7 @@ namespace Vy.Crm.Plugins
 
                 if (string.IsNullOrEmpty(templateId))
                 {
-                    throw new InvalidPluginExecutionException("TemplateId is required.");
+                    throw new InvalidPluginExecutionException("TemplateId є обов'язковим.");
                 }
 
                 var opp = service.Retrieve(
@@ -57,8 +57,8 @@ namespace Vy.Crm.Plugins
                         VY_Opportunity.Fields.VY_EstimatedValue)).ToEntity<VY_Opportunity>();
 
                 var email = new Entity("email");
-                email["subject"] = $"Quote for {opp.VY_Name}";
-                email["description"] = $"Estimated value: {opp.VY_EstimatedValue?.Value:N2}. Template ref: {templateId}";
+                email["subject"] = $"Комерційна пропозиція для {opp.VY_Name}";
+                email["description"] = $"Очікувана вартість: {opp.VY_EstimatedValue?.Value:N2}. Шаблон: {templateId}";
                 email["regardingobjectid"] = oppRef;
                 email["directioncode"] = true;
 

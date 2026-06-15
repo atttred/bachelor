@@ -54,7 +54,7 @@ namespace Vy.Crm.Plugins
                     if (service.RetrieveMultiple(query).Entities.Count > 0)
                     {
                         throw new InvalidPluginExecutionException(
-                            "An active opportunity for this customer with the same estimated value already exists.");
+                            "Активна угода для цього клієнта з такою ж очікуваною вартістю вже існує.");
                     }
                 }
                 catch (InvalidPluginExecutionException)

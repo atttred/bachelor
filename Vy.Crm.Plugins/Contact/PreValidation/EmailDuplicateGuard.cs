@@ -59,7 +59,7 @@ namespace Vy.Crm.Plugins
                     {
                         var existing = matches.Entities[0].GetAttributeValue<string>(VY_Contact.Fields.VY_FullName);
                         throw new InvalidPluginExecutionException(
-                            $"Contact with email '{email}' already exists ({existing}).");
+                            $"Контакт з електронною поштою '{email}' вже існує ({existing}).");
                     }
                 }
                 catch (InvalidPluginExecutionException)

@@ -7,7 +7,7 @@ namespace Vy.Crm.Shared.Helpers
         public const string Update = "update";
         public const string Delete = "delete";
 
-        public const string UnexpectedErrorMessage = "An unexpected error occurred. Please contact your administrator.";
+        public const string UnexpectedErrorMessage = "Сталася непередбачувана помилка. Будь ласка, зверніться до адміністратора.";
 
         public const string MinimumOpportunityValueEnvVar  = "vy_plugins_min_opportunity_value";
     }

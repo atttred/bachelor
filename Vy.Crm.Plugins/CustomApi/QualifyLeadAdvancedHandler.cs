@@ -37,7 +37,7 @@ namespace Vy.Crm.Plugins
 
                 if (leadRef == null)
                 {
-                    throw new InvalidPluginExecutionException("Lead reference missing. Call this API from a Lead record.");
+                    throw new InvalidPluginExecutionException("Відсутнє посилання на потенційного клієнта. Викличте цей API із запису потенційного клієнта.");
                 }
 
                 tracer.Trace("Qualifying lead {0}", leadRef.Id);
@@ -92,7 +92,7 @@ namespace Vy.Crm.Plugins
                 {
                     var opp = new VY_Opportunity
                     {
-                        VY_Name             = $"Opportunity from {lead.VY_Topic ?? lead.VY_FullName ?? "lead"}",
+                        VY_Name             = $"Угода з {lead.VY_Topic ?? lead.VY_FullName ?? "потенційного клієнта"}",
                         VY_EstimatedValue   = new Money(0m),
                         VY_SalesStageCode   = VY_Opportunity_VY_SalesStageCode.Prospecting
                     };
@@ -121,7 +121,7 @@ namespace Vy.Crm.Plugins
             catch (Exception ex)
             {
                 tracer.Trace(ex.ToString());
-                throw new InvalidPluginExecutionException($"Qualify Lead Advanced failed: {ex.Message}");
+                throw new InvalidPluginExecutionException($"Не вдалося виконати Qualify Lead Advanced: {ex.Message}");
             }
         }
     }

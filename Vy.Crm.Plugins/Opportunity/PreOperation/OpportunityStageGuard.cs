@@ -43,7 +43,7 @@ namespace Vy.Crm.Plugins
                     if (newStage.Value < previousStage.Value)
                     {
                         throw new InvalidPluginExecutionException(
-                            "Sales stage cannot regress. Mark the opportunity as Lost instead.");
+                            "Етап продажу не може повертатися назад. Натомість позначте угоду як «Втрачено».");
                     }
                 }
                 catch (InvalidPluginExecutionException)

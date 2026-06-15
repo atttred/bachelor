@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Sales Stage Progress</title>
+    <title>Прогрес етапу продажу</title>
     <style>
         body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 12px; background: transparent; }
         .stages { display: flex; gap: 4px; height: 40px; align-items: stretch; }
@@ -19,11 +19,11 @@
     <div id="err" class="err"></div>
     <script>
         var stageDefs = [
-            { value: 127550000, label: "Prospecting" },
-            { value: 127550001, label: "Qualified" },
-            { value: 127550002, label: "Proposal" },
-            { value: 127550003, label: "Negotiation" },
-            { value: 127550004, label: "Closing" }
+            { value: 127550000, label: "Пошук клієнтів" },
+            { value: 127550001, label: "Кваліфіковано" },
+            { value: 127550002, label: "Пропозиція" },
+            { value: 127550003, label: "Перемовини" },
+            { value: 127550004, label: "Закриття" }
         ];
 
         function render(currentValue) {
@@ -45,7 +45,7 @@
             try {
                 var xrm = window.parent && window.parent.Xrm;
                 if (!xrm || !xrm.Page || !xrm.Page.data || !xrm.Page.data.entity) {
-                    document.getElementById("err").textContent = "Open this from an opportunity record.";
+                    document.getElementById("err").textContent = "Відкрийте це із запису угоди.";
                     render(null);
                     return;
                 }
@@ -56,7 +56,7 @@
                     stageAttr.addOnChange(function () { render(stageAttr.getValue()); });
                 }
             } catch (e) {
-                document.getElementById("err").textContent = "Stage progress unavailable: " + (e && e.message);
+                document.getElementById("err").textContent = "Прогрес етапу недоступний: " + (e && e.message);
                 render(null);
             }
         }

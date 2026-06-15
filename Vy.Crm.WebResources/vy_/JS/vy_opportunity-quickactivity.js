@@ -7,7 +7,7 @@ Vy.Crm.QuickActivity = new function () {
     this.open = function (primaryControl) {
         var fc = primaryControl;
         if (!fc || !fc.data || !fc.data.entity) {
-            Vy.Crm.Notify.alert("Open the opportunity first.");
+            Vy.Crm.Notify.alert("Спершу відкрийте угоду.");
             return;
         }
 
@@ -32,7 +32,7 @@ Vy.Crm.QuickActivity = new function () {
             },
             function (err) {
                 Vy.Crm.Log.error("Quick activity failed", err);
-                Vy.Crm.Notify.alert("Could not open Quick Activity form. Make sure the Activity table is created and has a Quick Create form.");
+                Vy.Crm.Notify.alert("Не вдалося відкрити форму швидкої дії. Переконайтеся, що таблицю «Дія» створено та що вона має форму швидкого створення.");
             }
         );
     };
