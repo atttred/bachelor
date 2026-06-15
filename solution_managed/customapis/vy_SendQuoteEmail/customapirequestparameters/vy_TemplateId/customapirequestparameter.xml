@@ -1,9 +1,11 @@
 <customapirequestparameter uniquename="vy_TemplateId">
-  <description default="Identifier of the email template (Guid or template name as string).">
+  <description default="Ідентифікатор шаблону електронного листа (GUID або назва шаблону у вигляді рядка).">
     <label description="Identifier of the email template (Guid or template name as string)." languagecode="1033" />
+    <label description="Ідентифікатор шаблону електронного листа (GUID або назва шаблону у вигляді рядка)." languagecode="1058" />
   </description>
-  <displayname default="Template Id">
+  <displayname default="Ідентифікатор шаблону">
     <label description="Template Id" languagecode="1033" />
+    <label description="Ідентифікатор шаблону" languagecode="1058" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isoptional>0</isoptional>

@@ -39,7 +39,7 @@ Vy.Crm.Opportunity = new function () {
         var customer = fc.getAttribute(self.Constants.Attributes.CustomerId).getValue();
         if (!customer || customer.length === 0) {
             executionContext.getEventArgs().preventDefault();
-            Vy.Crm.Notify.error(fc, "Customer is required.");
+            Vy.Crm.Notify.error(fc, "Клієнт обов'язковий.");
         } else {
             Vy.Crm.Notify.clear(fc, "vy_err");
         }
@@ -55,8 +55,8 @@ Vy.Crm.Opportunity = new function () {
             .then(function (raw) {
                 var floor = parseFloat(raw);
                 if (!isNaN(floor) && current < floor) {
-                    Vy.Crm.Notify.warn(fc, "Estimated value below configured minimum of " + floor + ".");
-                    valueAttr.controls.forEach(function (c) { c.setNotification("Below minimum.", "vy_min"); });
+                    Vy.Crm.Notify.warn(fc, "Очікувана вартість нижча за налаштований мінімум " + floor + ".");
+                    valueAttr.controls.forEach(function (c) { c.setNotification("Нижче мінімуму.", "vy_min"); });
                 } else {
                     valueAttr.controls.forEach(function (c) { c.clearNotification("vy_min"); });
                     Vy.Crm.Notify.clear(fc, "vy_warn");
@@ -71,7 +71,7 @@ Vy.Crm.Opportunity = new function () {
         var fc = executionContext.getFormContext();
         var stage = fc.getAttribute(self.Constants.Attributes.SalesStageCode).getValue();
         if (stage === Vy.Crm.Constants.SalesStage.Closing) {
-            Vy.Crm.Notify.info(fc, "Stage set to Closing. Save to trigger probability recalculation.");
+            Vy.Crm.Notify.info(fc, "Етап встановлено на «Закриття». Збережіть, щоб перерахувати ймовірність.");
         }
     };
 

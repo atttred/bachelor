@@ -1,11 +1,11 @@
-<ImportExportXml version="9.2.26044.163" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26044.163" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26044.00163">
+<ImportExportXml version="9.2.26053.146" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26053.146" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26053.00146">
   <SolutionManifest>
     <UniqueName>CRM</UniqueName>
     <LocalizedNames>
       <LocalizedName description="Enterprise CRM" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.1.0.9</Version>
+    <Version>1.1.0.10</Version>
     <Managed>1</Managed>
     <Publisher>
       <UniqueName>vitaliy</UniqueName>
@@ -115,14 +115,14 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="61" schemaName="ActivityFeedsRules.svg" displayName="ActivityFeedsRules.svg" solution="PowerPlatformEnvironmentSettings (2.2.3384.3)">
-          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3384.3">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3384.3)</package>
+        <Required type="61" schemaName="ActivityFeedsRules.svg" displayName="ActivityFeedsRules.svg" solution="PowerPlatformEnvironmentSettings (2.2.3412.1)">
+          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3412.1">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3412.1)</package>
         </Required>
         <Dependent type="62" schemaName="vy_CRM" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="Administration.svg" displayName="Administration.svg" solution="PowerPlatformEnvironmentSettings (2.2.3384.3)">
-          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3384.3">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3384.3)</package>
+        <Required type="61" schemaName="Administration.svg" displayName="Administration.svg" solution="PowerPlatformEnvironmentSettings (2.2.3412.1)">
+          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3412.1">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3412.1)</package>
         </Required>
         <Dependent type="62" schemaName="vy_CRM" />
       </MissingDependency>
@@ -133,8 +133,8 @@
         <Dependent type="80" schemaName="vy_CRM" displayName="Enterprise CRM" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="msdyncrm_/KnowledgeArticleSubgrid/Hierarchy_16.svg" displayName="msdyncrm_/KnowledgeArticleSubgrid/Hierarchy_16.svg" solution="msdynce_KnowledgeManagementFeatures (9.0.26044.3019)">
-          <package appName="msdynce_KnowledgeManagement" version="9.0.26044.3019">msdynce_KnowledgeManagementAnchor (9.0.26044.3019)</package>
+        <Required type="61" schemaName="msdyncrm_/KnowledgeArticleSubgrid/Hierarchy_16.svg" displayName="msdyncrm_/KnowledgeArticleSubgrid/Hierarchy_16.svg" solution="msdynce_KnowledgeManagementFeatures (9.0.26052.3035)">
+          <package appName="msdynce_KnowledgeManagement" version="9.0.26052.3035">msdynce_KnowledgeManagementAnchor (9.0.26052.3035)</package>
         </Required>
         <Dependent type="62" schemaName="vy_CRM" />
       </MissingDependency>
@@ -145,19 +145,19 @@
         <Dependent type="62" schemaName="vy_CRM" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="SalesInsights.svg" displayName="SalesInsights.svg" solution="PowerPlatformEnvironmentSettings (2.2.3384.3)">
-          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3384.3">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3384.3)</package>
+        <Required type="61" schemaName="SalesInsights.svg" displayName="SalesInsights.svg" solution="PowerPlatformEnvironmentSettings (2.2.3412.1)">
+          <package appName="PowerPlatformEnvironmentSettingsApp" version="2.2.3412.1">PowerPlatformEnvironmentSettingsApp_Anchor (2.2.3412.1)</package>
         </Required>
         <Dependent type="62" schemaName="vy_CRM" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="connectionreference" displayName="msdyn_Dataverse" solution="msdynce_KnowledgeManagementOnlineExtension (9.0.26044.3019)" id.connectionreferencelogicalname="msdyn_Dataverse">
-          <package appName="msdynce_KnowledgeManagement" version="9.0.26044.3019">msdynce_KnowledgeManagementAnchor (9.0.26044.3019)</package>
+        <Required type="connectionreference" displayName="msdyn_Dataverse" solution="msdynce_KnowledgeManagementOnlineExtension (9.0.26052.3035)" id.connectionreferencelogicalname="msdyn_Dataverse">
+          <package appName="msdynce_KnowledgeManagement" version="9.0.26052.3035">msdynce_KnowledgeManagementAnchor (9.0.26052.3035)</package>
         </Required>
         <Dependent type="connectionreference" displayName="msdyn_Dataverse" id.connectionreferencelogicalname="msdyn_Dataverse" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.16)" id.uniquename="AppChannel">
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.17)" id.uniquename="AppChannel">
           <package appName="PowerAppsAppFramework Package" version="1.0.0.25">PowerAppsAppFramework_Anchor (1.0.0.25)</package>
         </Required>
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=vy_CRM,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="vy_CRM" id.settingdefinitionid.uniquename="AppChannel" />

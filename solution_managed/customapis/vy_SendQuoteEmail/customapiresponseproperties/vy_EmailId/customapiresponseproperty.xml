@@ -1,9 +1,11 @@
 <customapiresponseproperty uniquename="vy_EmailId">
-  <description default="Email Id">
+  <description default="Ідентифікатор електронного листа">
     <label description="Email Id" languagecode="1033" />
+    <label description="Ідентифікатор електронного листа" languagecode="1058" />
   </description>
-  <displayname default="Email Id">
+  <displayname default="Ідентифікатор електронного листа">
     <label description="Email Id" languagecode="1033" />
+    <label description="Ідентифікатор електронного листа" languagecode="1058" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <logicalentityname>email</logicalentityname>

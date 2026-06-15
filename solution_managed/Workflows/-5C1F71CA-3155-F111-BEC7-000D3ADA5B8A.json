@@ -1,0 +1,204 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Director Email (vy_flows_director_email)": {
+          "defaultValue": "vitalii.yanitskyi@lnu.edu.ua",
+          "type": "String",
+          "metadata": {
+            "schemaName": "vy_flows_director_email"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "860b22e4-349e-43e1-8e71-ebcabec20e2f"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "vy_opportunity",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statuscode",
+              "subscriptionRequest/filterexpression": "statuscode eq 127550001"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Scope": {
+          "actions": {
+            "Get_a_row_by_ID": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "3bc1d238-bfcc-4049-8ec8-61bdf7d159dd"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "vy_opportunitys",
+                  "recordId": "@triggerOutputs()?['body/vy_opportunityid']",
+                  "$select": "vy_name, vy_estimatedvalue, statecode, statuscode, ownerid"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Compose": {
+              "runAfter": {
+                "Get_a_row_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f92cba64-f28d-402c-826f-ef2e38abfa6e"
+              },
+              "type": "Compose",
+              "inputs": {
+                "name": "@{outputs('Get_a_row_by_ID')?['body/vy_name']}",
+                "amount": "@{outputs('Get_a_row_by_ID')?['body/vy_estimatedvalue']}",
+                "owner": "@{outputs('Get_a_row_by_ID')?['body/_ownerid_value@OData.Community.Display.V1.FormattedValue']}",
+                "ownerId": "@{outputs('Get_a_row_by_ID')?['body/_ownerid_value']}",
+                "statuscode": "@{outputs('Get_a_row_by_ID')?['body/statuscode']}",
+                "outcome": "@{outputs('Get_a_row_by_ID')?['body/statuscode@OData.Community.Display.V1.FormattedValue']}",
+                "id": "@{triggerOutputs()?['body/vy_opportunityid']}"
+              }
+            },
+            "Send_an_email_(V2)": {
+              "runAfter": {
+                "Compose": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c90c36da-84b3-4783-a885-ace6de55cee4"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "vitalii.yanitskyi@lnu.edu.ua",
+                  "emailMessage/Subject": "[CRM] Opportunity @{outputs('Compose')['outcome']}: @{outputs('Compose')['name']}",
+                  "emailMessage/Body": "<h3>@{outputs('Compose')['name']}</h3>\n<table>\n  <tr><td><strong>Outcome</strong></td><td>@{outputs('Compose')['outcome']}</td></tr>\n  <tr><td><strong>Amount</strong></td><td>@{outputs('Compose')['amount']}</td></tr>\n  <tr><td><strong>Owner</strong></td><td>@{outputs('Compose')['owner']}</td></tr>\n</table>\n<p><a href=\"https://enterprisebachelor.crm4.dynamics.com/main.aspx?appid=522eccd1-7dcf-4e2d-bae6-553d2e980efe&pagetype=entityrecord&etn=vy_opportunity&id=@{outputs('Compose')['id']}\">Open in CRM</a></p>\n",
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition": {
+              "actions": {
+                "Add_a_new_row": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "a168c830-57d0-44a2-9a1b-52fb328febeb"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "vy_activities",
+                      "item/vy_subject": "Onboarding kickoff: @{outputs('Compose')['name']}",
+                      "item/vy_activitytypecode": 127550000,
+                      "item/vy_regardingobjectid_vy_opportunity@odata.bind": "vy_opportunities(@{outputs('Compose')['id']})",
+                      "item/vy_scheduledstart": "@addDays(utcNow(), 1)",
+                      "item/ownerid@odata.bind": "systemusers(@{outputs('Compose')['ownerId']})"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Send_an_email_(V2)": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@equals(int(outputs('Compose')['statuscode']), 127550001)",
+                  "@true"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "4b1b8573-4b12-4fd8-8cd0-82a54da10ae7"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "85243f38-5545-44bf-9f40-3dc4b9c855f9"
+          },
+          "type": "Scope"
+        },
+        "Initialize_variable": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "3dcced41-8e6f-4214-beb9-c0fd403ba5a5"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "vEmail",
+                "type": "string",
+                "value": "@parameters('Director Email (vy_flows_director_email)')"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

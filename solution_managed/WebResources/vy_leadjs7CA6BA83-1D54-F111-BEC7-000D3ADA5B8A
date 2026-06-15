@@ -45,14 +45,14 @@ Vy.Crm.Lead = new function () {
         var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
         var ctrl = fc.getControl(self.Constants.Attributes.Email);
         if (ctrl) {
-            if (ok) ctrl.clearNotification("vy_email"); else ctrl.setNotification("Invalid email format.", "vy_email");
+            if (ok) ctrl.clearNotification("vy_email"); else ctrl.setNotification("Невірний формат електронної пошти.", "vy_email");
         }
     };
 
     this.qualifyAdvanced = function (primaryControl) {
         var fc = primaryControl;
         if (!fc || !fc.data || !fc.data.entity) {
-            Vy.Crm.Notify.alert("Open the lead first.");
+            Vy.Crm.Notify.alert("Спершу відкрийте потенційного клієнта.");
             return;
         }
         var id = fc.data.entity.getId();
@@ -60,7 +60,7 @@ Vy.Crm.Lead = new function () {
 
         Vy.Crm.WebApi.executeAction("vy_QualifyLeadAdvanced", null, leadRef)
             .then(function (result) {
-                Vy.Crm.Notify.info(fc, "Qualified. Opportunity created.");
+                Vy.Crm.Notify.info(fc, "Кваліфіковано. Угоду створено.");
                 if (fc.data && fc.data.refresh) fc.data.refresh(false);
                 if (result && result.OpportunityId && result.OpportunityId !== "00000000-0000-0000-0000-000000000000") {
                     Xrm.Navigation.openForm({ entityName: "vy_opportunity", entityId: result.OpportunityId });
@@ -68,7 +68,7 @@ Vy.Crm.Lead = new function () {
             })
             .catch(function (err) {
                 Vy.Crm.Log.error("Qualify advanced failed", err);
-                var msg = err && err.message ? err.message : "Qualification failed.";
+                var msg = err && err.message ? err.message : "Не вдалося кваліфікувати.";
                 Vy.Crm.Notify.error(fc, msg);
             });
     };

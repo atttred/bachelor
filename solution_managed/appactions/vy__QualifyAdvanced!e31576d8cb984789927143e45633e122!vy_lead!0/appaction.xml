@@ -1,6 +1,7 @@
 <appaction uniquename="vy__QualifyAdvanced!e31576d8cb984789927143e45633e122!vy_lead!0">
-  <buttonlabeltext default="Qualify (Advanced)">
+  <buttonlabeltext default="Кваліфікувати (розширено)">
     <label description="Qualify (Advanced)" languagecode="1033" />
+    <label description="Кваліфікувати (розширено)" languagecode="1058" />
   </buttonlabeltext>
   <context>1</context>
   <contextentity>

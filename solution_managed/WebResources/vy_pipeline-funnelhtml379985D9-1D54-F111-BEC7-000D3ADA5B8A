@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Pipeline Funnel</title>
+    <title>Воронка продажів</title>
     <style>
         body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 16px; background: #fff; color: #1f2937; }
         h3 { margin: 0 0 12px 0; font-size: 14px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -14,16 +14,16 @@
     </style>
 </head>
 <body>
-    <h3>Pipeline by Sales Stage</h3>
+    <h3>Воронка за етапами продажу</h3>
     <svg id="funnel" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>
     <div id="err" class="err"></div>
     <script>
         var stages = [
-            { value: 127550000, label: "Prospecting", color: "#0078d4" },
-            { value: 127550001, label: "Qualified",   color: "#106ebe" },
-            { value: 127550002, label: "Proposal",    color: "#005a9e" },
-            { value: 127550003, label: "Negotiation", color: "#004578" },
-            { value: 127550004, label: "Closing",     color: "#093565" }
+            { value: 127550000, label: "Пошук клієнтів", color: "#0078d4" },
+            { value: 127550001, label: "Кваліфіковано",  color: "#106ebe" },
+            { value: 127550002, label: "Пропозиція",     color: "#005a9e" },
+            { value: 127550003, label: "Перемовини",     color: "#004578" },
+            { value: 127550004, label: "Закриття",       color: "#093565" }
         ];
 
         function render(counts) {
@@ -69,7 +69,7 @@
             try {
                 var xrm = window.parent && window.parent.Xrm;
                 if (!xrm || !xrm.WebApi) {
-                    document.getElementById("err").textContent = "Open from inside the app.";
+                    document.getElementById("err").textContent = "Відкрийте всередині застосунку.";
                     render(stages.map(function () { return 0; }));
                     return;
                 }
@@ -84,11 +84,11 @@
                     });
                     render(counts);
                 }, function (err) {
-                    document.getElementById("err").textContent = (err && err.message) || "Failed to load funnel data.";
+                    document.getElementById("err").textContent = (err && err.message) || "Не вдалося завантажити дані воронки.";
                     render(stages.map(function () { return 0; }));
                 });
             } catch (e) {
-                document.getElementById("err").textContent = e.message || "Failed.";
+                document.getElementById("err").textContent = e.message || "Помилка.";
             }
         }
         if (document.readyState === "loading") {

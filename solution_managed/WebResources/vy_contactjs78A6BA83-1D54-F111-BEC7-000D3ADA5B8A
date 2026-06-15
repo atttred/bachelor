@@ -32,7 +32,7 @@ Vy.Crm.Contact = new function () {
         if (ok) {
             ctrl.clearNotification("vy_email");
         } else {
-            ctrl.setNotification("Invalid email format.", "vy_email");
+            ctrl.setNotification("Невірний формат електронної пошти.", "vy_email");
         }
     };
 };

@@ -1,6 +1,7 @@
 <appaction uniquename="vy__QuickActivity!8dfc207355b04f69bc6a13908e0c2630!vy_opportunity!0">
-  <buttonlabeltext default="Quick Activity">
+  <buttonlabeltext default="Швидка дія">
     <label description="Quick Activity" languagecode="1033" />
+    <label description="Швидка дія" languagecode="1058" />
   </buttonlabeltext>
   <context>1</context>
   <contextentity>

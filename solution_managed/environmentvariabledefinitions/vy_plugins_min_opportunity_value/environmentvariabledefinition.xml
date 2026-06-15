@@ -1,6 +1,7 @@
 <environmentvariabledefinition schemaname="vy_plugins_min_opportunity_value">
-  <displayname default="Minimum Opportunity Value">
+  <displayname default="Мінімальна вартість угоди">
     <label description="Minimum Opportunity Value" languagecode="1033" />
+    <label description="Мінімальна вартість угоди" languagecode="1058" />
   </displayname>
   <introducedversion>1.1.0.8</introducedversion>
   <iscustomizable>1</iscustomizable>

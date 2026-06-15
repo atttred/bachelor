@@ -2,11 +2,13 @@
   <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
   <bindingtype>1</bindingtype>
   <boundentitylogicalname>vy_lead</boundentitylogicalname>
-  <description default="Atomically qualifies a lead: creates Account, Contact, Opportunity and closes the lead.">
+  <description default="Атомарно кваліфікує потенційного клієнта: створює компанію, контакт, угоду та закриває потенційного клієнта.">
     <label description="Atomically qualifies a lead: creates Account, Contact, Opportunity and closes the lead." languagecode="1033" />
+    <label description="Атомарно кваліфікує потенційного клієнта: створює компанію, контакт, угоду та закриває потенційного клієнта." languagecode="1058" />
   </description>
-  <displayname default="Qualify Lead Advanced">
+  <displayname default="Розширена кваліфікація потенційного клієнта">
     <label description="Qualify Lead Advanced" languagecode="1033" />
+    <label description="Розширена кваліфікація потенційного клієнта" languagecode="1058" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

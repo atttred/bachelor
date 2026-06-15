@@ -2,11 +2,13 @@
   <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
   <bindingtype>1</bindingtype>
   <boundentitylogicalname>vy_opportunity</boundentitylogicalname>
-  <description default="Creates an email record from a template, tied to the opportunity.">
+  <description default="Створює запис електронного листа з шаблону, пов'язаного з угодою.">
     <label description="Creates an email record from a template, tied to the opportunity." languagecode="1033" />
+    <label description="Створює запис електронного листа з шаблону, пов'язаного з угодою." languagecode="1058" />
   </description>
-  <displayname default="Send Quote Email">
+  <displayname default="Надіслати лист із комерційною пропозицією">
     <label description="Send Quote Email" languagecode="1033" />
+    <label description="Надіслати лист із комерційною пропозицією" languagecode="1058" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

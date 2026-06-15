@@ -1,0 +1,11 @@
+<dvtablesearch dvtablesearchid="cd969805-db5c-f111-a825-0022489f6eab">
+  <appmoduleuniquename>vy_CRM</appmoduleuniquename>
+  <iscustomizable>1</iscustomizable>
+  <m365appmoduleid>
+    <uniquename>vy_CRM</uniquename>
+  </m365appmoduleid>
+  <name>M365_Primary_model_vy_CRM</name>
+  <searchtype>0</searchtype>
+  <statecode>1</statecode>
+  <statuscode>2</statuscode>
+</dvtablesearch>

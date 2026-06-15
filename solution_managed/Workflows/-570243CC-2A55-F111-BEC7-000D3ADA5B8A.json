@@ -1,0 +1,179 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_teams": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_teams"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {},
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Director Email (vy_flows_director_email)": {
+          "defaultValue": "vitalii.yanitskyi@lnu.edu.ua",
+          "type": "String",
+          "metadata": {
+            "schemaName": "vy_flows_director_email"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "e70e26a3-cfdd-4884-97c7-9bad76cb831e"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "vy_lead",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statecode",
+              "subscriptionRequest/filterexpression": "statecode eq 1",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Initialize_variable": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1b407d52-3322-4904-8fbc-0645ccdd0179"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "vLeadId",
+                "type": "string",
+                "value": "@triggerOutputs()?['body/vy_leadid']"
+              }
+            ]
+          }
+        },
+        "Scope": {
+          "actions": {
+            "Get_a_row_by_ID": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "8c4ff5d3-b7dd-45df-833f-c4f107b66207"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "vy_leads",
+                  "recordId": "@variables('vLeadId')",
+                  "$select": "vy_fullname, vy_topic, vy_companyname"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Post_card_in_a_chat_or_channel_2": {
+              "runAfter": {
+                "Get_a_row_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "df5fe4ab-0105-451d-b531-317a2b6fcb42"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_teams",
+                  "operationId": "PostCardToConversation",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+                },
+                "parameters": {
+                  "poster": "Flow bot",
+                  "location": "Chat with Flow bot",
+                  "body/recipient": "@{parameters('Director Email (vy_flows_director_email)')};",
+                  "body/messageBody": "{\n  \"type\": \"AdaptiveCard\",\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"version\": \"1.4\",\n  \"body\": [\n    { \"type\": \"TextBlock\", \"size\": \"Medium\", \"weight\": \"Bolder\", \"text\": \"Lead qualified\" },\n    { \"type\": \"FactSet\", \"facts\": [\n        { \"title\": \"Lead\",    \"value\": \"@{outputs('Get_a_row_by_ID')?['body/vy_fullname']}\" },\n        { \"title\": \"Topic\",   \"value\": \"@{outputs('Get_a_row_by_ID')?['body/vy_topic']}\" },\n        { \"title\": \"Company\", \"value\": \"@{outputs('Get_a_row_by_ID')?['body/vy_companyname']}\" }\n      ]\n    },\n    { \"type\": \"TextBlock\", \"text\": \"Customer record created via vy_QualifyLeadAdvanced. Check the new Opportunity in CRM.\", \"wrap\": true }\n  ]\n}"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c888597e-c533-4eb8-8350-86fb17f45d3b"
+          },
+          "type": "Scope"
+        },
+        "Scope_|_Catch": {
+          "actions": {
+            "Post_card_in_a_chat_or_channel": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "9b20cb72-738e-4c57-8bcb-3298ffd8229c"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_teams",
+                  "operationId": "PostCardToConversation",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+                },
+                "parameters": {
+                  "poster": "Flow bot",
+                  "location": "Chat with Flow bot",
+                  "body/recipient": "vitalii.yanitskyi@lnu.edu.ua;",
+                  "body/messageBody": "{\n  \"type\": \"AdaptiveCard\",\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"version\": \"1.4\",\n  \"body\": [\n    { \"type\": \"TextBlock\", \"size\": \"Medium\", \"weight\": \"Bolder\", \"text\": \"Lead qualification failed\" },\n    { \"type\": \"TextBlock\", \"text\": \"Lead Id: \", \"wrap\": true }\n  ]\n}"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Scope": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2d1c27b7-0ace-46dc-bcba-6ceb37477048"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

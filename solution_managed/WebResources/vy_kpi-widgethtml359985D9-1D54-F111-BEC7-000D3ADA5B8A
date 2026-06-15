@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>KPI Widget</title>
+    <title>Віджет KPI</title>
     <style>
         body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 16px; background: #fff; color: #1f2937; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -16,9 +16,9 @@
 </head>
 <body>
     <div class="grid">
-        <div class="card"><div class="label">Open Opportunities</div><div class="value" id="open">-</div></div>
-        <div class="card green"><div class="label">Pipeline Value</div><div class="value" id="pipeline">-</div></div>
-        <div class="card amber"><div class="label">Avg. Probability</div><div class="value" id="avg">-</div></div>
+        <div class="card"><div class="label">Відкриті угоди</div><div class="value" id="open">-</div></div>
+        <div class="card green"><div class="label">Вартість воронки</div><div class="value" id="pipeline">-</div></div>
+        <div class="card amber"><div class="label">Сер. ймовірність</div><div class="value" id="avg">-</div></div>
     </div>
     <div id="err" class="err"></div>
     <script>
@@ -31,7 +31,7 @@
             try {
                 var xrm = window.parent && window.parent.Xrm;
                 if (!xrm || !xrm.WebApi) {
-                    document.getElementById("err").textContent = "Open from inside the app.";
+                    document.getElementById("err").textContent = "Відкрийте всередині застосунку.";
                     return;
                 }
                 var query = "?$select=vy_estimatedvalue,vy_probability&$filter=statecode eq 0";
@@ -52,10 +52,10 @@
                         ? Math.round(totalProb / probSamples) + "%"
                         : "-";
                 }, function (err) {
-                    document.getElementById("err").textContent = (err && err.message) || "Failed to load KPI data.";
+                    document.getElementById("err").textContent = (err && err.message) || "Не вдалося завантажити дані KPI.";
                 });
             } catch (e) {
-                document.getElementById("err").textContent = e.message || "Failed.";
+                document.getElementById("err").textContent = e.message || "Помилка.";
             }
         }
         if (document.readyState === "loading") {
