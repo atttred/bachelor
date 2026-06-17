@@ -62,3 +62,8 @@ Register the plugin steps and import the managed solution from
 `solution_managed/` into the target Dataverse environment. The minimum
 opportunity value check reads the `vy_plugins_min_opportunity_value` environment
 variable.
+
+## Application
+
+Deployed Power Apps application (model-driven):
+[Open the Vy.Crm app](https://enterprisebachelor.crm4.dynamics.com/main.aspx?appid=522eccd1-7dcf-4e2d-bae6-553d2e980efe&pagetype=entitylist&etn=vy_lead&viewid=9acb7d0d-d030-43d1-a80f-c1c02c31f96f&viewType=1039)

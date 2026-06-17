@@ -61,3 +61,8 @@ dotnet build Vy.Crm.Plugins/Vy.Crm.Plugins.csproj
 Зареєструйте кроки плагінів та імпортуйте кероване рішення з
 `solution_managed/` у цільове середовище Dataverse. Перевірка мінімальної
 вартості угоди зчитує змінну середовища `vy_plugins_min_opportunity_value`.
+
+## Застосунок
+
+Розгорнутий застосунок Power Apps (модельно-керований):
+[Відкрити застосунок Vy.Crm](https://enterprisebachelor.crm4.dynamics.com/main.aspx?appid=522eccd1-7dcf-4e2d-bae6-553d2e980efe&pagetype=entitylist&etn=vy_lead&viewid=9acb7d0d-d030-43d1-a80f-c1c02c31f96f&viewType=1039)
